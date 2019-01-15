@@ -1,9 +1,22 @@
 $(document).ready(function(){
-  let actual = randomNumber();
+  let max = 10;
+  const actual = randomNumber();
 
   $('#guess').click(function(){
     const input = document.getElementById("input").value
-    $('#last').text(input);
+
+    // if ( validate(input) ) {
+      $('#last-note').text('Your last guess was');
+      $('#last').text(input);
+
+      if (input == actual) {
+        $('#results').text("BOOM!");
+      } else if (input > actual) {
+        $('#results').text("That is too high");
+      } else {
+        $('#results').text("That is too low");
+      }
+    // }
   });
 
   $('#clear').click(function(){
@@ -16,17 +29,21 @@ $(document).ready(function(){
   })
 
   function randomNumber () {
-    return Math.floor(Math.random()*100)
+    return Math.floor(Math.random() * max) + 1
   }
 
   function reset () {
     $('h2').text("");
     $('h3').text("");
+    $('input:text').val("");
+  }
 
+  function validate(input) {
+    if (Number.isInteger(input) || input < 0 || input > max) {
+      alert(`Please Enter a number between 0 and ${max}`);
+      return false;
+    } else {
+      return true;
+    }
   }
 });
-// $(document).ready(function(){
-//   $("p").click(function(){
-//     $(this).css('color', 'red');
-//   });
-// });
