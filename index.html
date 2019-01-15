@@ -5,23 +5,23 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
     <header>
-      <h1 id="title-1" class="bold">Number </h1>  <h1 id="title-2" class="light"> Guesser</h1>
+      <h1 id="title-1" class="bold">Number</h1>  <h1 id="title-2" class="light">Guesser</h1>
     </header>
     <div class="form">
-      <input type="text" id="input" class="light" value="Enter Your Guess"><br>
+      <input type="text" id="input" class="light" placeholder="Enter Your Guess"><br>
       <button type="button" class="light" id="guess">Guess</button>
       <button type="button" class="light" id="clear">Clear</button>
     </div>
     <div class="feedback">
       <h2 class="light">Your last guess was</h2>
-      <h3 class="light">25</h3>
+      <h3 class="light" id="last"></h3>
       <h2 class="light" id="high-low">That is too high</h2>
     </div>
     <button type="button" id="reset">Reset</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
   </body>
-  <script type="text/javascript" src="script.js"></script>
 </html>
