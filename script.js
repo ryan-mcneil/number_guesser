@@ -5,7 +5,7 @@ $(document).ready(function(){
   $('#guess').click(function(){
     const input = document.getElementById("input").value
 
-    // if ( validate(input) ) {
+    if ( validate(input) ) {
       $('#last-note').text('Your last guess was');
       $('#last').text(input);
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
       } else {
         $('#results').text("That is too low");
       }
-    // }
+    }
   });
 
   $('#clear').click(function(){
@@ -39,7 +39,7 @@ $(document).ready(function(){
   }
 
   function validate(input) {
-    if (Number.isInteger(input) || input < 0 || input > max) {
+    if (isNaN(parseInt(input)) || input < 0 || input > max) {
       alert(`Please Enter a number between 0 and ${max}`);
       return false;
     } else {
