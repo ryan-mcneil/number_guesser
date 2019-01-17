@@ -1,6 +1,11 @@
 $(document).ready(function(){
   let max = 10;
-  const actual = randomNumber();
+  let actual = randomNumber();
+
+  $(document).on('change mousedown mouseup mouseout keyup', function(){
+    disableClear();
+    disableReset();
+  });
 
   $('#input').keypress(function(e) {
     if (e.keyCode === 13) {
@@ -26,22 +31,22 @@ $(document).ready(function(){
   });
 
   $('#clear').click(function(){
-    reset();
+    $('input:text').val("");
   })
 
   $('#reset').click(function(){
     reset();
-    actual = randomNumber();
   })
 
-  function randomNumber () {
-    return Math.floor(Math.random() * max) + 1
+  function randomNumber() {
+    return Math.floor(Math.random() * max) + 1;
   }
 
   function reset () {
     $('h2').text("");
     $('h3').text("");
     $('input:text').val("");
+    actual = randomNumber();
   }
 
   function validate(input) {
@@ -52,4 +57,23 @@ $(document).ready(function(){
       return true;
     }
   }
+
+  function disableClear() {
+    if ($("#input").val() === '') {
+      $('#clear').prop('disabled', true);
+    } else {
+      $('#clear').prop('disabled', false);
+    }
+  }
+
+  function disableReset() {
+    if($('#last').text() === '') {
+      $('#reset').prop('disabled', true);
+    } else {
+      $('#reset').prop('disabled', false);
+    }
+  }
+
+
+
 });
