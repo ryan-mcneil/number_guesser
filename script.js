@@ -2,6 +2,12 @@ $(document).ready(function(){
   let max = 10;
   const actual = randomNumber();
 
+  $('#input').keypress(function(e) {
+    if (e.keyCode === 13) {
+      $('#guess').click();
+    }
+  });
+
   $('#guess').click(function(){
     const input = document.getElementById("input").value
 
