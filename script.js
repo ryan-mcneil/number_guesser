@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  let min = 0;
   let max = 10;
   let actual = randomNumber();
 
@@ -39,19 +40,19 @@ $(document).ready(function(){
   })
 
   function randomNumber() {
-    return Math.floor(Math.random() * max) + 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   function reset () {
-    $('h2').text("");
-    $('h3').text("");
+    $('#last').text("");
+    $('.feedback-text').text("");
     $('input:text').val("");
     actual = randomNumber();
   }
 
   function validate(input) {
-    if (isNaN(parseInt(input)) || input < 0 || input > max) {
-      alert(`Please Enter a number between 0 and ${max}`);
+    if (isNaN(parseInt(input)) || input < min || input > max) {
+      alert(`Please Enter a number between ${min} and ${max}`);
       return false;
     } else {
       return true;
