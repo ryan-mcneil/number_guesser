@@ -21,7 +21,8 @@ $(document).ready(function(){
       $('#last').text(input);
 
       if (input == actual) {
-        $('#results').text("BOOM!");
+        $('#results').text("BOOM! We've made it harder, guess again!");
+        expandRange();
       } else if (input > actual) {
         $('#results').text("That is too high");
       } else {
@@ -107,6 +108,14 @@ $(document).ready(function(){
     } else {
       return true;
     }
+  }
+
+  function expandRange() {
+    min -= 10;
+    max += 10;
+    $('#min').text(min);
+    $('#max').text(max);
+    actual = randomNumber()
   }
 
 
