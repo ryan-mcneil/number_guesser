@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  let min = 0;
   let max = 10;
   let actual = randomNumber();
 
@@ -14,14 +15,14 @@ $(document).ready(function(){
   });
 
   $('#guess').click(function(){
-    const input = document.getElementById("input").value
-
+    const input = document.getElementById("input").value;
     if ( validate(input) ) {
       $('#last-note').text('Your last guess was');
       $('#last').text(input);
 
       if (input == actual) {
-        $('#results').text("BOOM!");
+        $('#results').text("BOOM! We've made it harder, guess again!");
+        expandRange();
       } else if (input > actual) {
         $('#results').text("That is too high");
       } else {
@@ -31,27 +32,44 @@ $(document).ready(function(){
   });
 
   $('#clear').click(function(){
-    $('input:text').val("");
-  })
+    clear();
+  });
 
   $('#reset').click(function(){
     reset();
-  })
+  });
+
+  $('#update').click(function(){
+    let newMin = parseInt(document.getElementById("update-min").value);
+    let newMax = parseInt(document.getElementById("update-max").value);
+
+    if (validateMin(newMin, newMax) && validateMax(newMin, newMax)) {
+      min = newMin;
+      max = newMax;
+      $('#min').text(min);
+      $('#max').text(max);
+      reset();
+    }
+  });
 
   function randomNumber() {
-    return Math.floor(Math.random() * max) + 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function reset () {
-    $('h2').text("");
-    $('h3').text("");
-    $('input:text').val("");
+  function reset() {
+    $('#last').text("");
+    $('.feedback-text').text("");
     actual = randomNumber();
+    clear();
+  }
+
+  function clear() {
+    $('input:text').val("");
   }
 
   function validate(input) {
-    if (isNaN(parseInt(input)) || input < 0 || input > max) {
-      alert(`Please Enter a number between 0 and ${max}`);
+    if (isNaN(parseInt(input)) || input < min || input > max) {
+      alert(`Please Enter a number between ${min} and ${max}`);
       return false;
     } else {
       return true;
@@ -74,6 +92,31 @@ $(document).ready(function(){
     }
   }
 
+  function validateMin(newMin, newMax) {
+    if (isNaN(parseInt(newMin)) || newMin > newMax) {
+      alert('Min should be an integer less than the Max');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function validateMax(newMin, newMax) {
+    if (isNaN(parseInt(newMax)) || newMax < newMin) {
+      alert('Max should be an integer greater than the Min');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function expandRange() {
+    min -= 10;
+    max += 10;
+    $('#min').text(min);
+    $('#max').text(max);
+    actual = randomNumber()
+  }
 
 
 });
